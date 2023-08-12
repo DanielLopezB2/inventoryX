@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2 class="text-center mt-4">Visualizar Productos</h2>
+
+<div class="container mt-4 mb-4 text-center">
+
+  <div class="row">
+    <div class="col-sm">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col" class="d-none d-sm-table-cell">Stock</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+          <tr>
+            <td><a href="{% url 'perfil' producto.pk %}">{{ producto.nombre }}</a></td>
+            <td>${{ producto.precio }}</td>
+            <td class="d-none d-sm-table-cell">{{ producto.stock }}</td>
+            <td><img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100"></td>
+            <td>
+              <a class="btn btn-outline-success" href="{% url 'actualizar' producto.pk %}">Actualizar</a>
+              <a class="btn btn-outline-danger" href="{% url 'eliminar' producto.pk %}">Eliminar</a>
+            </td>
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-12">
+          <a class="btn btn-secondary" href="{% url 'dashboard' %}" style="margin-bottom: 100px;">Atras</a>
+      </div>
+    </div>
+  </div>        
+</div>
+
+{% endblock %}

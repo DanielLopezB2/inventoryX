@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2 class="text-center mt-4">Buscar Productos</h2>
+
+<div class="container mt-4 mb-4 text-center">
+
+    <form action="{% url 'buscar' %}" method="GET" class="form-inline justify-content-center mb-4">
+        <input type="text" class="form-control mr-sm-2" name="q" placeholder="Buscar producto">
+        <button type="submit" class="btn btn-primary mt-3">Buscar</button>
+    </form>
+    <hr>
+
+    <h4 class="text-primary mt-4">Resultados</h4>
+
+    {% if resultados %}
+    <div class="table table-sm mt-4">
+        <table class="table table-sm mt-4">
+            <thead>
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col" class="d-none d-sm-table-cell">Stock</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for producto in resultados %}
+            <tr>
+                <td><a href="{% url 'perfil' producto.pk %}">{{ producto.nombre }}</a></td>
+                <td>${{ producto.precio }}</td>
+                <td class="d-none d-sm-table-cell">{{ producto.stock }}</td>
+                <td><img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100"></td>
+                <td>
+                    <a class="btn btn-outline-success" href="{% url 'actualizar' producto.pk %}">Actualizar</a>
+                    <a class="btn btn-outline-danger" href="{% url 'eliminar' producto.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    {% else %}
+    <div class="alert alert-info text-center">
+        No se encontraron productos.
+    </div>
+    {% endif %}
+
+    <div class="row text-center">
+        <div class="col-12">
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}" style="margin-bottom: 100px;">Atras</a>
+        </div>
+    </div>
+        
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2 class="text-center mt-4 text-primary">{{producto.nombre}}</h2>
+
+<div class="container mt-4 mb-4 text-center" style="margin-bottom: 100px;">
+
+    <div class="row mt-4">
+        <div class="col-sm mt-4">
+            <img class="img-fluid" src="{{producto.imagen.url}}" alt="" style="max-width: 300px;">
+        </div>
+
+        <div class="col-sm mt-4">
+
+            <div class="row">
+                <p><strong class="text-primary">Precio: </strong>${{producto.precio}}</p>
+            </div>
+
+            <div class="row">
+                <p><strong class="text-primary">Stock: </strong>{{producto.stock}} unidades.</p>
+            </div>
+
+            <div class="row">
+                <p><strong class="text-primary">Descripcion: </strong>{{producto.descripcion}}</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-12">
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}" style="margin-bottom: 100px;">Atras</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

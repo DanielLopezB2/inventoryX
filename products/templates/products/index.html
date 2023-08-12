@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<h1 class="text-center mt-4">Inventory X | Funko</h1>
+
+<div class="container mt-4 text-center" style="margin-bottom: 100px;">
+
+    <div class="row">
+        {% for producto in productos %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card">
+                <img src="{{ producto.imagen.url }}" class="card-img-top img-fluid" alt="{{ producto.nombre }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">${{ producto.precio }}</p>
+                    <a class="btn btn-outline-primary" href="{% url 'perfil' producto.pk %}">Detalles</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock content %}
